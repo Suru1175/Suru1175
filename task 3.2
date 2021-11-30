@@ -1,0 +1,12 @@
+import numpy as np
+import cv2
+a = np.array([[[240,67,89],[240,62,86]],])
+a.shape
+p2 = np.zeros((600,1000,3),dtype=np.uint8)
+for i in range(p2.shape[1]):
+    for j in range(p2.shape[0]):
+        p2[j,i]=i
+p2.shape
+cv2.imshow("Hi", p2)
+cv2.waitKey()
+cv2.destroyAllWindows()
