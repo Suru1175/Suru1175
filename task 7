@@ -1,0 +1,22 @@
+import cv2
+import numpy
+cap = cv2.VideoCapture(0)
+model = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+while True:
+        ret,photo = cap.read()
+        fdetect = model.detectMultiScale(photo)
+        if len(fdetect) == 0:
+            print("no faces")
+        else:
+            x1 = fdetect[0][0]
+            y1 = fdetect[0][1]
+            x2 = fdetect[0][2] + x1
+            y2 = fdetect[0][3] + y1
+            a = photo [y1:y2 , x1:x2]
+
+            bphoto = cv2.blur(a,(20,20))
+            nphoto = numpy.hstack((bphoto,a))
+            cv2.imshow("video",nphoto)
+            if cv2.waitKey(100) == 13:
+                break
+cv2.destoyAllWindows()
